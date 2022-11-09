@@ -1,536 +1,560 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
-  <head>
+
+<head>
     <title>Heart</title>
     <meta name="Generator" content="EditPlus" />
     <meta name="Author" content="" />
     <meta name="Keywords" content="" />
     <meta name="Description" content="" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
 
     <style>
-      html,
-      body {
-        height: 100%;
-        padding: 0;
-        margin: 0;
-        background: #000;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .boxed {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;    
-    transform: translate(-50% , -50%);
-    width: 90px;
-    z-index: 99;
-    margin-top: 1.5em;
-    height: 90px;
-  
-}
-.boxed:before {
-    position: absolute;
-    background-color: #e69c9f;
-    width:90px;
-    height: 100px;
-    content:'';
-    bottom: 0;
-    left   : 0;
-    clip-path: polygon(0 40% , 50% 0 , 100% 40%, 100% 100% , 0 100%);
-
-}
-.boxed::after{
-    position :absolute;
-    width : 90px;
-    background-color: #000;
-    content:'';
-    bottom: -30px;
-    height: 10px;
-    opacity: 0.4;
-    filter: blur(10px);
-}
-.content {
-        position: absolute;
-        bottom: 0;
-        color: red;
-        width: 80%;
-        height: 80px;
-        left: 50%;
-        transform: translate(-50%, -10px);
-        transition: 0.5s;
-        background-color: #f2eee4;
-    }
-
-
-.designBox {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width:100%;
-    height: 60px;
-    background-color: #d26f72;
-    display: block;
-    clip-path: polygon(0 0 ,50% 35%, 100% 0 ,100% 100% ,0 100%);
-}
-.designBox::after{
-    position:absolute;
-    bottom: 0;
-    left :0;
-    height: 65%;
-    width: 100%;
-    background-color: #bd5559;
-    content:'';
-    clip-path: polygon(0 100%, 50% 0 ,100% 100%);
-}
-.boxed:hover .content{
-    transform: translate(-50% , -15%);
-    
-}
-input {
-    position: absolute;
-    left: -10px;
-    display: none;
-    
-}
-input:checked ~ .content {
-    bottom: 70px;
-    width: 14em;
-    height: 18em;
-    margin:0;
-    left:50%;
-    transform: translate(-50%);
-}
-@media only screen and (max-width: 600px) {
-  input:checked ~ .content {
-    bottom: 70px;
-    width: 20em;
-    height: 25em;
-    margin:0;
-    left:50%;
-    transform: translate(-50%);}
-}
-
-@media only screen and (min-width: 992px) {
-  input:checked ~ .content {
-    bottom: 70px;
-    width: 20em;
-    height: 25em;
-    margin:0;
-    left:50%;
-    transform: translate(-50%);}
-
-  
-}
-.content .tilted {
-    width: 100%;
-    text-align: center;
-    font-weight: 700; 
-    font-size: x-large;
-    display: none;
-}
-.content .des {
-    padding:10px 20px;
-    display: none;
-}
-.content label {
-    width: 100%;
-    text-align: center;
-    display: block;
-    display: none;
-}
-.content img {
-    display: none;
-    width: 300px;
-    height: 150px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-    
-}
-input:checked ~ .content img,
-input:checked ~ .content .tilted,
-input:checked ~ .content .des,
-input:checked ~ .content label {
-    display: block;
-    opacity: 0;
-    animation: showContent 1s ease-in-out 0.5s 1 forwards;
-}
-input:checked ~ .content .tilted {
-    animation-delay: 0.8s !important;
-}
-input:checked ~ .content img {
-    animation-delay: 0.7s;
-}
-input:checked ~ .content .des {
-    animation-delay: 1.1s;
-}
-input:checked ~ .content label  {
-    animation-delay: 1.3s;
-}
-@keyframes showContent {
-    from {
-        opacity: 0;
-        transform: translate(0,50px);
-    }to {
-        opacity: 1;
-        transform: translate(0,0);
-    }
-}
-
-      .box {
-        width: 100%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: flex;
-        flex-direction: column;
-      }
-
-      canvas {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-      }
-      #pinkboard {
-        position: relative;
-        margin: auto;
-        height: 500px;
-        width: 500px;
-        animation: animate 2s infinite;
-      }
-      h1 {
-        animation: animate 2s infinite;
-      }
-      #pinkboard:before,
-      #pinkboard:after {
-        content: "";
-        position: absolute;
-        background: #ff5ca4;
-        width: 100px;
-        height: 160px;
-        border-top-left-radius: 50px;
-        border-top-right-radius: 50px;
-      }
-
-      #pinkboard:before {
-        left: 100px;
-        transform: rotate(-45deg);
-        transform-origin: 0 100%;
-        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
-          0 10px 10px rgba(0, 0, 0, 0.22);
-      }
-
-      #pinkboard:after {
-        left: 0;
-        transform: rotate(45deg);
-        transform-origin: 100% 100%;
-      }
-
-      @keyframes animate {
-        0% {
-          transform: scale(1);
+        html,
+        body {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            background:#EDDBCA;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        30% {
-          transform: scale(0.8);
+        
+        .boxed {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: translate(-50%, -50%);
+            width: 90px;
+            z-index: 99;
+            margin-top: 1.5em;
+            height: 90px;
         }
-        60% {
-          transform: scale(1.2);
+        
+        .boxed:before {
+            position: absolute;
+            background-color: #e69c9f;
+            width: 90px;
+            height: 100px;
+            content: '';
+            bottom: 0;
+            left: 0;
+            clip-path: polygon(0 40%, 50% 0, 100% 40%, 100% 100%, 0 100%);
         }
-        100% {
-          transform: scale(1);
+        
+        .boxed::after {
+            position: absolute;
+            width: 90px;
+            background-color: #000;
+            content: '';
+            bottom: -30px;
+            height: 10px;
+            opacity: 0.4;
+            filter: blur(10px);
         }
-      }
+        
+        .content {
+          
+            position: absolute;
+            bottom: 0;
+            color: rgb(197, 105, 105);
+            width: 80%;
+            height: 80px;
+            left: 50%;
+            transform: translate(-50%, -10px);
+            transition: 0.5s;
+            background-color: #f2eee4;
 
-
+        }
+        
+        .designBox {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #d26f72;
+            display: block;
+            clip-path: polygon(0 0, 50% 35%, 100% 0, 100% 100%, 0 100%);
+        }
+        
+        .designBox::after {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 65%;
+            width: 100%;
+            background-color: #bd5559;
+            content: '';
+            clip-path: polygon(0 100%, 50% 0, 100% 100%);
+        }
+        
+        .boxed:hover .content {
+            transform: translate(-50%, -15%);
+        }
+        
+        input {
+            position: absolute;
+            left: -10px;
+            display: none;
+        }
+        
+        input:checked~.content {
+            bottom: 70px;
+            width: 14em;
+            height: 18em;
+            margin: 0;
+            left: 50%;
+            transform: translate(-50%);
+            opacity:0.9;
+        }
+        /* @media only screen and (min-width: 992px) {
+            input:checked~.content {
+                bottom: 70px;
+                width: 200px;
+                height: 300px;
+                margin: 0;
+                left: 50%;
+                transform: translate(-50%);
+            }
+        } */
+        
+        @media only screen and (min-width: 600px) and (max-width: 992px) {
+            input:checked~.content {
+                bottom: 70px;
+                width: 30em;
+                height: 35em;
+                margin: 0;
+                left: 50%;
+                transform: translate(-50%);
+            }
+            .content {
+                padding-top: 3em;
+            }
+        }
+        
+        .content .tilted {
+            width: 100%;
+            text-align: center;
+            font-weight: 700;
+            font-size: x-large;
+            display: none;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .content .des {
+            padding: 10px 20px;
+            font-family: 'Playfair Display', serif;
+            display: none;
+        }
+        
+        .content label {
+            width: 100%;
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            display: block;
+            display: none;
+        }
+        
+        .content img {
+            padding-top: 1.2em;
+            display: none;
+            width: 300px;
+            height: 150px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+        
+        input:checked~.content img,
+        input:checked~.content .tilted,
+        input:checked~.content .des,
+        input:checked~.content label {
+            display: block;
+            opacity: 0;
+            animation: showContent 1s ease-in-out 0.5s 1 forwards;
+        }
+        
+        input:checked~.content .tilted {
+            animation-delay: 0.8s !important;
+        }
+        
+        input:checked~.content img {
+            animation-delay: 0.7s;
+        }
+        
+        input:checked~.content .des {
+            animation-delay: 1.1s;
+        }
+        
+        input:checked~.content label {
+            animation-delay: 1.3s;
+        }
+        
+        @keyframes showContent {
+            from {
+                opacity: 0;
+                transform: translate(0, 50px);
+            }
+            to {
+                opacity: 1;
+                transform: translate(0, 0);
+            }
+        }
+        
+        .box {
+            width: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        canvas {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #pinkboard {
+            position: relative;
+            margin: auto;
+            height: 500px;
+            width: 500px;
+            animation: animate 2s infinite;
+        }
+        
+        h1 {
+            animation: animate 2s infinite;
+        }
+        
+        #pinkboard:before,
+        #pinkboard:after {
+            content: "";
+            position: absolute;
+            background: #ff5ca4;
+            width: 100px;
+            height: 160px;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+        }
+        
+        #pinkboard:before {
+            left: 100px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+        }
+        
+        #pinkboard:after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+        
+        @keyframes animate {
+            0% {
+                transform: scale(1);
+            }
+            30% {
+                transform: scale(0.8);
+            }
+            60% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
     </style>
-  </head>
-  <body>
+</head>
+
+<body>
     <div class="message">
-      <div class="boxed">
-        <input type="checkbox" name="" id="message" checked />
-        <div class="content">
-          <img src="anh1.png" alt="">
-          <div class="tilted"></div>
-          <div class="des">
-          </div>
-          <label for="message">Close</label>
+        <div class="boxed">
+            <input type="checkbox" name="" id="message" checked />
+            <div class="content">
+                <img src="anh1.png" alt="">
+                <div class="tilted"> Vân Anh</div>
+                <div class="des">
+                </div>
+                <label for="message">Close</label>
+            </div>
+            <label for="message" class="designBox"> </label>
         </div>
-        <label for="message" class="designBox"> </label>
-      </div>
     </div>
     <div class="box">
-      <canvas id="pinkboard"></canvas>
+        <canvas id="pinkboard"></canvas>
     </div>
 
     <script>
-      
-      var settings = {
-        particles: {
-          length: 1000, 
-          duration: 3, 
-          velocity: 100, 
-          effect: -0.75, 
-          size: 13, 
-        },
-      };
-      
-      (function () {
-        var b = 0;
-        var c = ["ms", "moz", "webkit", "o"];
-        for (var a = 0; a < c.length && !window.requestAnimationFrame; ++a) {
-          window.requestAnimationFrame = window[c[a] + "RequestAnimationFrame"];
-          window.cancelAnimationFrame =
-            window[c[a] + "CancelAnimationFrame"] ||
-            window[c[a] + "CancelRequestAnimationFrame"];
-        }
-        if (!window.requestAnimationFrame) {
-          window.requestAnimationFrame = function (h, e) {
-            var d = new Date().getTime();
-            var f = Math.max(0, 16 - (d - b));
-            var g = window.setTimeout(function () {
-              h(d + f);
-            }, f);
-            b = d + f;
-            return g;
-          };
-        }
-        if (!window.cancelAnimationFrame) {
-          window.cancelAnimationFrame = function (d) {
-            clearTimeout(d);
-          };
-        }
-      })();
-      
-      var Point = (function () {
-        function Point(x, y) {
-          this.x = typeof x !== "undefined" ? x : 0;
-          this.y = typeof y !== "undefined" ? y : 0;
-        }
-        Point.prototype.clone = function () {
-          return new Point(this.x, this.y);
+        var settings = {
+            particles: {
+                length: 1000,
+                duration: 3,
+                velocity: 100,
+                effect: -0.75,
+                size: 17,
+            },
         };
-        Point.prototype.length = function (length) {
-          if (typeof length == "undefined")
-            return Math.sqrt(this.x * this.x + this.y * this.y);
-          this.normalize();
-          this.x *= length;
-          this.y *= length;
-          return this;
-        };
-        Point.prototype.normalize = function () {
-          var length = this.length();
-          this.x /= length;
-          this.y /= length;
-          return this;
-        };
-        return Point;
-      })();
-      
-      var Particle = (function () {
-        function Particle() {
-          this.position = new Point();
-          this.velocity = new Point();
-          this.acceleration = new Point();
-          this.age = 0;
-        }
-        Particle.prototype.initialize = function (x, y, dx, dy) {
-          this.position.x = x;
-          this.position.y = y;
-          this.velocity.x = dx;
-          this.velocity.y = dy;
-          this.acceleration.x = dx * settings.particles.effect;
-          this.acceleration.y = dy * settings.particles.effect;
-          this.age = 0;
-        };
-        Particle.prototype.update = function (deltaTime) {
-          this.position.x += this.velocity.x * deltaTime;
-          this.position.y += this.velocity.y * deltaTime;
-          this.velocity.x += this.acceleration.x * deltaTime;
-          this.velocity.y += this.acceleration.y * deltaTime;
-          this.age += deltaTime;
-        };
-        Particle.prototype.draw = function (context, image) {
-          function ease(t) {
-            return --t * t * t + 1;
-          }
-          var size = image.width * ease(this.age / settings.particles.duration);
-          context.globalAlpha = 1 - this.age / settings.particles.duration;
-          context.drawImage(
-            image,
-            this.position.x - size / 2,
-            this.position.y - size / 2,
-            size,
-            size
-          );
-        };
-        return Particle;
-      })();
-      
-      var ParticlePool = (function () {
-        var particles,
-          firstActive = 0,
-          firstFree = 0,
-          duration = settings.particles.duration;
 
-        function ParticlePool(length) {
-          
-          particles = new Array(length);
-          for (var i = 0; i < particles.length; i++)
-            particles[i] = new Particle();
-        }
-        ParticlePool.prototype.add = function (x, y, dx, dy) {
-          particles[firstFree].initialize(x, y, dx, dy);
-
-          
-          firstFree++;
-          if (firstFree == particles.length) firstFree = 0;
-          if (firstActive == firstFree) firstActive++;
-          if (firstActive == particles.length) firstActive = 0;
-        };
-        ParticlePool.prototype.update = function (deltaTime) {
-          var i;
-
-          
-          if (firstActive < firstFree) {
-            for (i = firstActive; i < firstFree; i++)
-              particles[i].update(deltaTime);
-          }
-          if (firstFree < firstActive) {
-            for (i = firstActive; i < particles.length; i++)
-              particles[i].update(deltaTime);
-            for (i = 0; i < firstFree; i++) particles[i].update(deltaTime);
-          }
-
-          
-          while (
-            particles[firstActive].age >= duration &&
-            firstActive != firstFree
-          ) {
-            firstActive++;
-            if (firstActive == particles.length) firstActive = 0;
-          }
-        };
-        ParticlePool.prototype.draw = function (context, image) {
-          
-          if (firstActive < firstFree) {
-            for (i = firstActive; i < firstFree; i++)
-              particles[i].draw(context, image);
-          }
-          if (firstFree < firstActive) {
-            for (i = firstActive; i < particles.length; i++)
-              particles[i].draw(context, image);
-            for (i = 0; i < firstFree; i++) particles[i].draw(context, image);
-          }
-        };
-        return ParticlePool;
-      })();
-      
-      (function (canvas) {
-        var context = canvas.getContext("2d"),
-          particles = new ParticlePool(settings.particles.length),
-          particleRate =
-            settings.particles.length / settings.particles.duration, 
-          time;
-
-        
-        function pointOnHeart(t) {
-          return new Point(
-            160 * Math.pow(Math.sin(t), 3),
-            130 * Math.cos(t) -
-              50 * Math.cos(2 * t) -
-              20 * Math.cos(3 * t) -
-              10 * Math.cos(4 * t) +
-              25
-          );
-        }
-
-        
-        var image = (function () {
-          var canvas = document.createElement("canvas"),
-            context = canvas.getContext("2d");
-          canvas.width = settings.particles.size;
-          canvas.height = settings.particles.size;
-          
-          function to(t) {
-            var point = pointOnHeart(t);
-            point.x =
-              settings.particles.size / 2 +
-              (point.x * settings.particles.size) / 350;
-            point.y =
-              settings.particles.size / 2 -
-              (point.y * settings.particles.size) / 350;
-            return point;
-          }
-          
-          context.beginPath();
-          var t = -Math.PI;
-          var point = to(t);
-          context.moveTo(point.x, point.y);
-          while (t < Math.PI) {
-            t += 0.01; 
-            point = to(t);
-            context.lineTo(point.x, point.y);
-          }
-          context.closePath();
-          
-          context.fillStyle = "#FF5CA4";
-          context.fill();
-          
-          var image = new Image();
-          image.src = canvas.toDataURL();
-          return image;
+        (function() {
+            var b = 0;
+            var c = ["ms", "moz", "webkit", "o"];
+            for (var a = 0; a < c.length && !window.requestAnimationFrame; ++a) {
+                window.requestAnimationFrame = window[c[a] + "RequestAnimationFrame"];
+                window.cancelAnimationFrame =
+                    window[c[a] + "CancelAnimationFrame"] ||
+                    window[c[a] + "CancelRequestAnimationFrame"];
+            }
+            if (!window.requestAnimationFrame) {
+                window.requestAnimationFrame = function(h, e) {
+                    var d = new Date().getTime();
+                    var f = Math.max(0, 16 - (d - b));
+                    var g = window.setTimeout(function() {
+                        h(d + f);
+                    }, f);
+                    b = d + f;
+                    return g;
+                };
+            }
+            if (!window.cancelAnimationFrame) {
+                window.cancelAnimationFrame = function(d) {
+                    clearTimeout(d);
+                };
+            }
         })();
 
-        
-        function render() {
-          
-          requestAnimationFrame(render);
+        var Point = (function() {
+            function Point(x, y) {
+                this.x = typeof x !== "undefined" ? x : 0;
+                this.y = typeof y !== "undefined" ? y : 0;
+            }
+            Point.prototype.clone = function() {
+                return new Point(this.x, this.y);
+            };
+            Point.prototype.length = function(length) {
+                if (typeof length == "undefined")
+                    return Math.sqrt(this.x * this.x + this.y * this.y);
+                this.normalize();
+                this.x *= length;
+                this.y *= length;
+                return this;
+            };
+            Point.prototype.normalize = function() {
+                var length = this.length();
+                this.x /= length;
+                this.y /= length;
+                return this;
+            };
+            return Point;
+        })();
 
-          
-          var newTime = new Date().getTime() / 1000,
-            deltaTime = newTime - (time || newTime);
-          time = newTime;
+        var Particle = (function() {
+            function Particle() {
+                this.position = new Point();
+                this.velocity = new Point();
+                this.acceleration = new Point();
+                this.age = 0;
+            }
+            Particle.prototype.initialize = function(x, y, dx, dy) {
+                this.position.x = x;
+                this.position.y = y;
+                this.velocity.x = dx;
+                this.velocity.y = dy;
+                this.acceleration.x = dx * settings.particles.effect;
+                this.acceleration.y = dy * settings.particles.effect;
+                this.age = 0;
+            };
+            Particle.prototype.update = function(deltaTime) {
+                this.position.x += this.velocity.x * deltaTime;
+                this.position.y += this.velocity.y * deltaTime;
+                this.velocity.x += this.acceleration.x * deltaTime;
+                this.velocity.y += this.acceleration.y * deltaTime;
+                this.age += deltaTime;
+            };
+            Particle.prototype.draw = function(context, image) {
+                function ease(t) {
+                    return --t * t * t + 1;
+                }
+                var size = image.width * ease(this.age / settings.particles.duration);
+                context.globalAlpha = 1 - this.age / settings.particles.duration;
+                context.drawImage(
+                    image,
+                    this.position.x - size / 2,
+                    this.position.y - size / 2,
+                    size,
+                    size
+                );
+            };
+            return Particle;
+        })();
 
-          
-          context.clearRect(0, 0, canvas.width, canvas.height);
+        var ParticlePool = (function() {
+            var particles,
+                firstActive = 0,
+                firstFree = 0,
+                duration = settings.particles.duration;
 
-          
-          var amount = particleRate * deltaTime;
-          for (var i = 0; i < amount; i++) {
-            var pos = pointOnHeart(Math.PI - 2 * Math.PI * Math.random());
-            var dir = pos.clone().length(settings.particles.velocity);
-            particles.add(
-              canvas.width / 2 + pos.x,
-              canvas.height / 2 - pos.y,
-              dir.x,
-              -dir.y
-            );
-          }
+            function ParticlePool(length) {
 
-          
-          particles.update(deltaTime);
-          particles.draw(context, image);
-        }
+                particles = new Array(length);
+                for (var i = 0; i < particles.length; i++)
+                    particles[i] = new Particle();
+            }
+            ParticlePool.prototype.add = function(x, y, dx, dy) {
+                particles[firstFree].initialize(x, y, dx, dy);
 
-        
-        function onResize() {
-          canvas.width = canvas.clientWidth;
-          canvas.height = canvas.clientHeight;
-        }
-        window.onresize = onResize;
 
-        
-        setTimeout(function () {
-          onResize();
-          render();
-        }, 10);
-      })(document.getElementById("pinkboard"));
+                firstFree++;
+                if (firstFree == particles.length) firstFree = 0;
+                if (firstActive == firstFree) firstActive++;
+                if (firstActive == particles.length) firstActive = 0;
+            };
+            ParticlePool.prototype.update = function(deltaTime) {
+                var i;
+
+
+                if (firstActive < firstFree) {
+                    for (i = firstActive; i < firstFree; i++)
+                        particles[i].update(deltaTime);
+                }
+                if (firstFree < firstActive) {
+                    for (i = firstActive; i < particles.length; i++)
+                        particles[i].update(deltaTime);
+                    for (i = 0; i < firstFree; i++) particles[i].update(deltaTime);
+                }
+
+
+                while (
+                    particles[firstActive].age >= duration &&
+                    firstActive != firstFree
+                ) {
+                    firstActive++;
+                    if (firstActive == particles.length) firstActive = 0;
+                }
+            };
+            ParticlePool.prototype.draw = function(context, image) {
+
+                if (firstActive < firstFree) {
+                    for (i = firstActive; i < firstFree; i++)
+                        particles[i].draw(context, image);
+                }
+                if (firstFree < firstActive) {
+                    for (i = firstActive; i < particles.length; i++)
+                        particles[i].draw(context, image);
+                    for (i = 0; i < firstFree; i++) particles[i].draw(context, image);
+                }
+            };
+            return ParticlePool;
+        })();
+
+        (function(canvas) {
+            var context = canvas.getContext("2d"),
+                particles = new ParticlePool(settings.particles.length),
+                particleRate =
+                settings.particles.length / settings.particles.duration,
+                time;
+
+
+            function pointOnHeart(t) {
+                return new Point(
+                    160 * Math.pow(Math.sin(t), 3),
+                    130 * Math.cos(t) -
+                    50 * Math.cos(2 * t) -
+                    20 * Math.cos(3 * t) -
+                    10 * Math.cos(4 * t) +
+                    25
+                );
+            }
+
+
+            var image = (function() {
+                var canvas = document.createElement("canvas"),
+                    context = canvas.getContext("2d");
+                canvas.width = settings.particles.size;
+                canvas.height = settings.particles.size;
+
+                function to(t) {
+                    var point = pointOnHeart(t);
+                    point.x =
+                        settings.particles.size / 2 +
+                        (point.x * settings.particles.size) / 350;
+                    point.y =
+                        settings.particles.size / 2 -
+                        (point.y * settings.particles.size) / 350;
+                    return point;
+                }
+
+                context.beginPath();
+                var t = -Math.PI;
+                var point = to(t);
+                context.moveTo(point.x, point.y);
+                while (t < Math.PI) {
+                    t += 0.01;
+                    point = to(t);
+                    context.lineTo(point.x, point.y);
+                }
+                context.closePath();
+
+                context.fillStyle = "#bd5559";
+                context.fill();
+
+                var image = new Image();
+                image.src = canvas.toDataURL();
+                return image;
+            })();
+
+
+            function render() {
+
+                requestAnimationFrame(render);
+
+
+                var newTime = new Date().getTime() / 1000,
+                    deltaTime = newTime - (time || newTime);
+                time = newTime;
+
+
+                context.clearRect(0, 0, canvas.width, canvas.height);
+
+
+                var amount = particleRate * deltaTime;
+                for (var i = 0; i < amount; i++) {
+                    var pos = pointOnHeart(Math.PI - 2 * Math.PI * Math.random());
+                    var dir = pos.clone().length(settings.particles.velocity);
+                    particles.add(
+                        canvas.width / 2 + pos.x,
+                        canvas.height / 2 - pos.y,
+                        dir.x, -dir.y
+                    );
+                }
+
+
+                particles.update(deltaTime);
+                particles.draw(context, image);
+            }
+
+
+            function onResize() {
+                canvas.width = canvas.clientWidth;
+                canvas.height = canvas.clientHeight;
+            }
+            window.onresize = onResize;
+
+
+            setTimeout(function() {
+                onResize();
+                render();
+            }, 10);
+        })(document.getElementById("pinkboard"));
     </script>
-  </body>
+</body>
+
 </html>
-
-
